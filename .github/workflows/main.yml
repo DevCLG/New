@@ -1,14 +1,17 @@
-name: My First Workflow
- 
-on: push
- 
+name: Scheduled Workflow
+
+on:
+  schedule:
+    - cron: "0 9 * * *"   # Runs every day at 09:00 UTC
+  workflow_dispatch:     # Allows manual trigger from GitHub UI
+
 jobs:
-  build:
-    runs-on: windows-latest
- 
+  run-cron-job:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
- 
-      - name: Run a command
-        run: echo "Hello GitHub Actions"
+
+      - name: Run a simple command
+        run: echo "Hello! Cron job is running 🚀"
